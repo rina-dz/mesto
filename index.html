@@ -7,15 +7,81 @@
   <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body class="page">
+  <div class="popup">
+    <div class="popup__container">
+      <p class="popup__container_title">Редактировать профиль</p>
+      <div class="popup__container_field">
+        <input type="text" placeholder="Жак-Ив Кусто" class="popup__container_text"></input>
+      </div>
+      <div class="popup__container_field">
+        <input type="text" placeholder="Исследователь океана" class="popup__container_text"></input>
+      </div>
+      <div class="popup__container_submit">
+        <p class="popup__container_submit-text">Сохранить</p>
+      </div>
+    </div>
+  </div>
   <header class="header">
-
+    <img class="header__logo" src="./images/logo.svg" alt="Логотип место Россия">
   </header>
   <main class="content">
-
+    <section class="profile">
+      <img class="profile__avatar" src="./images/avatar.jpg" alt="аватар пользователя">
+      <div class="profile__info">
+        <p class="profile__info_name">Жак-Ив Кусто<img class="profile__info_edit-button" src="./images/Edit Button.svg" alt="кнопка для редактирования"></p>
+        <p class="profile__info_description">Исследователь океана</p>
+      </div>
+      <div class="profile__add-button"></div>
+    </section>
+    <section class="elements">
+      <div class="element">
+        <img class="element__image" src="./images/Schloss Drachenburg.webp" alt="Замок Драхенбург ">
+        <div class="element__info">
+          <h2 class="element__info_name">Замок Драхенбург </h2>
+          <img class="element__info_like" src="./images/Vector.svg" alt="сердечко">
+        </div>
+      </div>
+      <div class="element">
+        <img class="element__image" src="./images/The castle of Vêves.webp" alt="Замок Вевес">
+        <div class="element__info">
+          <h2 class="element__info_name">Замок Вевес</h2>
+          <img class="element__info_like" src="./images/Vector.svg" alt="сердечко">
+        </div>
+      </div>
+      <div class="element">
+        <img class="element__image" src="./images/Läckö Castle.webp" alt="Замок Лекке">
+        <div class="element__info">
+          <h2 class="element__info_name">Замок Лекке</h2>
+          <img class="element__info_like" src="./images/Vector.svg" alt="сердечко">
+        </div>
+      </div>
+      <div class="element">
+        <img class="element__image" src="./images/Neuschwanstein Castle.webp" alt="Замок Нойшванштайн">
+        <div class="element__info">
+          <h2 class="element__info_name">Замок Нойшванштайн</h2>
+          <img class="element__info_like" src="./images/Vector.svg" alt="сердечко">
+        </div>
+      </div>
+      <div class="element">
+        <img class="element__image" src="./images/Eltz Castle.webp" alt="Замок Эльц">
+        <div class="element__info">
+          <h2 class="element__info_name">Замок Эльц</h2>
+          <img class="element__info_like" src="./images/Vector.svg" alt="сердечко">
+        </div>
+      </div>
+      <div class="element">
+        <img class="element__image" src="./images/Eileen Donan Castle.webp" alt="Замок Эйлин Донан">
+        <div class="element__info">
+          <h2 class="element__info_name">Замок Эйлин Донан</h2>
+          <img class="element__info_like" src="./images/Vector.svg" alt="сердечко">
+        </div>
+      </div>
+    </section>
   </main>
   <footer class="footer">
-    <p class="footer__copyright"></p>
+    <p class="footer__copyright">© 2022 Mesto Russia</p>
   </footer>
+  <script src="script.js"></script>
 </body>
 </html>
 
