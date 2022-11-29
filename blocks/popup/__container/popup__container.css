@@ -1,4 +1,5 @@
-.popup__container{
+.popup__container {
+    position: relative;
     min-width: 430px;
     min-height: 330px;
     z-index: 11;

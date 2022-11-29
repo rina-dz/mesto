@@ -1,10 +1,12 @@
 .popup__container_submit {
-    margin: 48px 36px 37px;
+    margin: 18px 36px 37px;
     background-color: black;
     min-width: 358px;
     min-height: 50px;
-    display: flex;
-    align-items: center;
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21.78px;
     transition: opacity 0.5s;
 }
 
@@ -15,8 +17,10 @@
 
 @media screen and (min-width: 320px) and (max-width: 768px) {
     .popup__container_submit {
-        margin: 42px 22px 25px;
+        margin: 12px 22px 25px;
         min-width: 234px;
         min-height: 46px;
+        font-size: 14px;
+        line-height: 16.94px;
     } 
 }
