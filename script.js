@@ -3,8 +3,8 @@ let popup = document.querySelector('.popup');
 let closeButton = document.querySelector('.popup__close-icon');
 let submitButton = document.querySelector('.popup__submit');
 let formElement = document.querySelector('.popup__text');
-let nameInput  = document.querySelector('.name__input');
-let jobInput  = document.querySelector('.job__input');
+let nameInput  = document.querySelector('.popup__name');
+let jobInput  = document.querySelector('.popup__job');
 
 function visiblePopup() {
     popup.classList.add('popup_opened');
