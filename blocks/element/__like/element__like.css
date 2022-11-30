@@ -1,11 +1,11 @@
-.element__info_like {
+.element__like {
     width: 22px;
     height: 19px;
     margin: 5px 5px 0 auto;
     transition: opacity 0.5s;
 }
 
-.element__info_like:hover {
+.element__like:hover {
     opacity: 60%;
     cursor: pointer;
 }
