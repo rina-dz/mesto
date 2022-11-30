@@ -6,8 +6,8 @@
     border: 0;
 }
 
-.popup__text::-webkit-input-placeholder {color:#000000}
-.popup__text::-moz-placeholder          {color:#000000}
-.popup__text:-moz-placeholder           {color:#000000}
-.popup__text::-ms-input-placeholder     {color:#000000}
-.popup__text:-ms-input-placeholder      {color:#000000}
+.popup__text::-webkit-input-placeholder {color:#000000};
+.popup__text::-moz-placeholder          {color:#000000};
+.popup__text:-moz-placeholder           {color:#000000};
+.popup__text::-ms-input-placeholder     {color:#000000};
+.popup__text:-ms-input-placeholder      {color:#000000};
