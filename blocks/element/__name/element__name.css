@@ -1,4 +1,5 @@
 .element__name {
+    max-width: 219px;
     margin: 0;
     color: black;
     font-weight: 900;

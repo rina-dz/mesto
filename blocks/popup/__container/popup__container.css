@@ -1,17 +1,15 @@
 .popup__container {
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
     position: relative;
-    min-width: 430px;
-    min-height: 330px;
+    max-width: 430px;
     z-index: 11;
-    margin: 195px auto auto;
     background-color: #FFFFFF;
     border-radius: 10px;
 }
 
-@media screen and (min-width: 320px) and (max-width: 768px) {
+@media screen and (min-width: 320px) and (max-width: 900px) {
     .popup__container {
-        min-width: 282px;
+        max-width: 282px;
         min-height: 322px;
-        margin-top: 123px;
     } 
 }

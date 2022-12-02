@@ -7,19 +7,6 @@
   <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body class="page">
-  <div class="popup">
-    <div class="popup__container">
-      <p class="popup__title">Редактировать профиль</p>
-      <div class="popup__field">
-        <input type="text" placeholder="Жак-Ив Кусто" class="popup__text popup__name">
-      </div>
-      <div class="popup__field">
-        <input type="text" placeholder="Исследователь океана" class="popup__text popup__job">
-      </div>
-      <input type="submit" value="Сохранить" class="popup__submit">
-      <img class="popup__close-icon" src="./images/CloseIcon.svg" alt="иконка закрытия">
-    </div>
-  </div>
   <header class="header">
     <img class="header__logo" src="./images/logo.svg" alt="Логотип место Россия">
   </header>
@@ -27,60 +14,71 @@
     <section class="profile">
       <img class="profile__avatar" src="./images/avatar.jpg" alt="аватар пользователя">
       <div class="profile__info">
-        <p class="profile__name">Жак-Ив Кусто</p>
-        <img class="profile__edit-button" src="./images/EditButton.svg" alt="кнопка для редактирования">
+        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <button class="profile__edit-button" type="button"></button>
         <p class="profile__description">Исследователь океана</p>
       </div>
-      <div class="profile__add-button"></div>
+      <button class="profile__add-button" type="button"></button>
     </section>
     <section class="elements">
-      <div class="element">
+      <article class="element">
         <img class="element__image" src="./images/SchlossDrachenburg.webp" alt="Замок Драхенбург ">
         <div class="element__info">
           <h2 class="element__name">Замок Драхенбург </h2>
-          <img class="element__like" src="./images/Vector.svg" alt="сердечко">
+          <button class="element__like" type="button"></button>
         </div>
-      </div>
-      <div class="element">
+      </article>
+      <article class="element">
         <img class="element__image" src="./images/ThecastleofVêves.webp" alt="Замок Вевес">
         <div class="element__info">
           <h2 class="element__name">Замок Вевес</h2>
-          <img class="element__like" src="./images/Vector.svg" alt="сердечко">
+          <button class="element__like" type="button"></button>
         </div>
-      </div>
-      <div class="element">
+      </article>
+      <article class="element">
         <img class="element__image" src="./images/LäcköCastle.webp" alt="Замок Лекке">
         <div class="element__info">
           <h2 class="element__name">Замок Лекке</h2>
-          <img class="element__like" src="./images/Vector.svg" alt="сердечко">
+          <button class="element__like" type="button"></button>
         </div>
-      </div>
-      <div class="element">
+      </article>
+      <article class="element">
         <img class="element__image" src="./images/NeuschwansteinCastle.webp" alt="Замок Нойшванштайн">
         <div class="element__info">
           <h2 class="element__name">Замок Нойшванштайн</h2>
-          <img class="element__like" src="./images/Vector.svg" alt="сердечко">
+          <button class="element__like" type="button"></button>
         </div>
-      </div>
-      <div class="element">
+      </article>
+      <article class="element">
         <img class="element__image" src="./images/EltzCastle.webp" alt="Замок Эльц">
         <div class="element__info">
           <h2 class="element__name">Замок Эльц</h2>
-          <img class="element__like" src="./images/Vector.svg" alt="сердечко">
+          <button class="element__like" type="button"></button>
         </div>
-      </div>
-      <div class="element">
+      </article>
+      <article class="element">
         <img class="element__image" src="./images/EileenDonanCastle.webp" alt="Замок Эйлин Донан">
         <div class="element__info">
           <h2 class="element__name">Замок Эйлин Донан</h2>
-          <img class="element__like" src="./images/Vector.svg" alt="сердечко">
+          <button class="element__like" type="button"></button>
         </div>
-      </div>
+      </article>
     </section>
   </main>
   <footer class="footer">
     <p class="footer__copyright">© 2022 Mesto Russia</p>
   </footer>
+  <div class="popup">
+    <div class="popup__container">
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form name="Редакция профиля" id="edit_form"> 
+        <input type="text" name="Имя пользователя" placeholder="Имя" class="popup__text" id="input_name">
+        <input type="text" name="Род деятельности" placeholder="Род деятельности" class="popup__text" id="input_job">
+        <button class="popup__submit" type="submit">Сохранить</button>
+      </form>
+      <button type="button" class="popup__close-icon"></button>
+    </div>
+  </div>
   <script src="scripts/script.js"></script>
 </body>
 </html>

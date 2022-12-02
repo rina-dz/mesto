@@ -1,9 +1,10 @@
 .element__info {
-    margin: 25px 18px 31px;
+    margin: 0 15px 0 21px;
     display: flex;
     flex-direction: row;
     align-items: center;
     height: min-content;
     max-width: 246px;
+    min-height: 79px;
     justify-content: space-between;
 }

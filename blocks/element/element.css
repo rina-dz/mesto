@@ -1,4 +1,5 @@
 .element {
+    max-height: 361px;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;

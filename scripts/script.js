@@ -1,33 +1,34 @@
-let editButton = document.querySelector('.profile__edit-button');
-let popup = document.querySelector('.popup');
-let closeButton = document.querySelector('.popup__close-icon');
-let submitButton = document.querySelector('.popup__submit');
-let formElement = document.querySelector('.popup__text');
-let nameInput  = document.querySelector('.popup__name');
-let jobInput  = document.querySelector('.popup__job');
+const editButton = document.querySelector('.profile__edit-button');
+const popup = document.querySelector('.popup');
+const buttonToClose = document.querySelector('.popup__close-icon');
+const formElement = document.getElementById('edit_form');
+const nameInput = document.getElementById('input_name');
+const jobInput = document.getElementById('input_job'); 
+const oldName = document.querySelector('.profile__name');
+const oldJob = document.querySelector('.profile__description');
 
-function visiblePopup() {
+//функция для открытия попапа
+function makePopupVisible() {
     popup.classList.add('popup_opened');
+    nameInput.value = oldName.textContent;
+    jobInput.value = oldJob.textContent;
 }
 
+//функция для закрытия попапа
 function closePopup() {
     popup.classList.remove('popup_opened');
 }
 
-editButton.addEventListener('click', visiblePopup);
-closeButton.addEventListener('click', closePopup);
-
+//функция для изменения имени и рода деятельности
 function handleFormSubmit (evt) {
-    evt.preventDefault(); 
-    let oldName = document.querySelector('.profile__name');
-    let oldJob = document.querySelector('.profile__description');
-    let newName = nameInput.value;
-    let newJjob = jobInput.value;
+    evt.preventDefault();
 
-    oldName.textContent = newName;
-    oldJob.textContent = newJjob;
+    oldName.textContent = nameInput.value;
+    oldJob.textContent = jobInput.value;
     
-    popup.classList.remove('popup_opened');
+    closePopup();
 }
 
-submitButton.addEventListener('click', handleFormSubmit);
+formElement.addEventListener('submit', handleFormSubmit);
+editButton.addEventListener('click', makePopupVisible);
+buttonToClose.addEventListener('click', closePopup);
