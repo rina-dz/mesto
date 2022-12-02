@@ -1,10 +1,10 @@
 .element__name {
     max-width: 219px;
-    margin: 0;
+    margin: 25px 0 25px;
     color: black;
     font-weight: 900;
     font-size: 24px;
-    line-height: 29.05px;
+    line-height: 29px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
