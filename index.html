@@ -22,13 +22,15 @@
     </section>
     <section class="elements">
       <article class="element">
+        <button class="element__trash" type="button"></button>
         <img class="element__image" src="./images/SchlossDrachenburg.webp" alt="Замок Драхенбург ">
         <div class="element__info">
-          <h2 class="element__name">Замок Драхенбург </h2>
+          <h2 class="element__name">Замок Драхенбург</h2>
           <button class="element__like" type="button"></button>
         </div>
       </article>
       <article class="element">
+        <button class="element__trash" type="button"></button>
         <img class="element__image" src="./images/ThecastleofVêves.webp" alt="Замок Вевес">
         <div class="element__info">
           <h2 class="element__name">Замок Вевес</h2>
@@ -36,6 +38,7 @@
         </div>
       </article>
       <article class="element">
+        <button class="element__trash" type="button"></button>
         <img class="element__image" src="./images/LäcköCastle.webp" alt="Замок Лекке">
         <div class="element__info">
           <h2 class="element__name">Замок Лекке</h2>
@@ -43,6 +46,7 @@
         </div>
       </article>
       <article class="element">
+        <button class="element__trash" type="button"></button>
         <img class="element__image" src="./images/NeuschwansteinCastle.webp" alt="Замок Нойшванштайн">
         <div class="element__info">
           <h2 class="element__name">Замок Нойшванштайн</h2>
@@ -50,6 +54,7 @@
         </div>
       </article>
       <article class="element">
+        <button class="element__trash" type="button"></button>
         <img class="element__image" src="./images/EltzCastle.webp" alt="Замок Эльц">
         <div class="element__info">
           <h2 class="element__name">Замок Эльц</h2>
@@ -57,6 +62,7 @@
         </div>
       </article>
       <article class="element">
+        <button class="element__trash" type="button"></button>
         <img class="element__image" src="./images/EileenDonanCastle.webp" alt="Замок Эйлин Донан">
         <div class="element__info">
           <h2 class="element__name">Замок Эйлин Донан</h2>
@@ -68,7 +74,7 @@
   <footer class="footer">
     <p class="footer__copyright">© 2022 Mesto Russia</p>
   </footer>
-  <div class="popup">
+  <div class="popup" id="popup_edit">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <form name="Revision" id="edit_form"> 
@@ -79,6 +85,34 @@
       <button type="button" class="popup__close-icon"></button>
     </div>
   </div>
+  <div class="popup" id="popup_add">
+    <div class="popup__container">
+      <h2 class="popup__title">Новое место</h2>
+      <form name="Revision" id="add_form"> 
+        <input type="text" name="Placename" placeholder="Название" class="popup__text" id="input_placename">
+        <input type="text" name="PictureLink" placeholder="Ссылка на картинку" class="popup__text" id="input_link">
+        <button class="popup__submit" type="submit">Создать</button>
+      </form>
+      <button type="button" class="popup__close-icon"></button>
+    </div>
+  </div>
+  <div class="popup" id="popup_image">
+    <div class="popup__image-box">
+      <img src="" class="popup__image">
+      <h2 class="popup__description"></h2>
+      <button type="button" class="popup__close-icon"></button>
+    </div>
+  </div>
+  <template id="new_element">
+    <article class="element">
+      <button class="element__trash" type="button"></button>
+      <img class="element__image" src="" alt="Изображение карточки">
+      <div class="element__info">
+        <h2 class="element__name"></h2>
+        <button class="element__like" type="button"></button>
+      </div>
+    </article>
+  </template>
   <script src="scripts/script.js"></script>
 </body>
 </html>
