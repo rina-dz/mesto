@@ -51,11 +51,22 @@ function addCardsForJS() {
 //функция для открытия попапа
 function openPopup(el) {
   el.classList.add('popup_opened');
+  document.addEventListener('click', closePopupOverlay);
+  document.addEventListener('keydown', function (evt) {
+    if (evt.key === "Escape") {
+      el.classList.remove('popup_opened');
+    }
+  });
 }
 //функция для закрытия попапа
 function closePopup(evt) {
   const eventTarget = evt.target;
   eventTarget.closest('.popup').classList.remove('popup_opened');
+  document.removeEventListener('keydown', function (evt) {
+    if (evt.key === "Escape") {
+      eventTarget.closest('.popup').classList.remove('popup_opened');
+    }
+  });
 }
 //функция для открытия попапа-профиля
 function makePopupEditVisible() {
@@ -114,6 +125,19 @@ function createCard(imageLink, imageName) {
   //изменение цвета сердечка при нажатии
   cardElement.querySelector('.element__like').addEventListener('click', changingLike);
   return cardElement;
+}
+//закрытие попапа с помощью escape 
+function closePopupEscape(evt) {
+  if (evt.key === "Escape") {
+    const popupOpen = 
+    closePopup(popupOpen);
+  }
+}
+//закрытие попапа нажатием на оверлей
+function closePopupOverlay(evt) {
+  if (evt.target.classList.contains('popup_opened')) {
+    closePopup(evt);
+  }
 }
 //закрытие попапа
 buttonToClose.forEach(el => {
