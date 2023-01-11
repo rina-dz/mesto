@@ -29,7 +29,7 @@
   <div class="popup" id="popup_edit">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form name="editForm" id="edit_form" class="form"> 
+      <form name="editForm" id="edit_form" class="form" novalidate> 
         <input type="text" name="Username" placeholder="Имя" class="popup__text" id="input_name" minlength="2" maxlength="40" required>
         <span class="popup__error" id="input_name-error"></span>
         <input type="text" name="Occupation" placeholder="Род деятельности" class="popup__text" id="input_job" minlength="2" maxlength="200" required>
@@ -42,7 +42,7 @@
   <div class="popup" id="popup_add">
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
-      <form name="addForm" id="add_form" class="form"> 
+      <form name="addForm" id="add_form" class="form" novalidate> 
         <input type="text" name="Placename" placeholder="Название" class="popup__text" id="input_placename" minlength="2" maxlength="30" required>
         <span class="popup__error" id="input_placename-error"></span>
         <input name="PictureLink" placeholder="Ссылка на картинку" class="popup__text" id="input_link" type="url" required>
@@ -69,6 +69,7 @@
       </div>
     </article>
   </template>
+  <script src="scripts/cards.js"></script>
   <script src="scripts/script.js"></script>
   <script src="scripts/validate.js"></script>
 </body>

@@ -1,53 +1,84 @@
+const validationConfig = {
+  formSelector: '.form',
+  inputSelector: '.popup__text',
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit-disabled',
+  inputErrorClass: 'popup__text-error',
+  errorClass: 'popup__error-visible'
+};
 //функция демонстрации ошибки
-function showError(input, errorMessage) {
-    const inputError = document.querySelector(`#${input.id}-error`);
-    inputError.textContent = errorMessage;
-    inputError.classList.add('popup__error-visible');
+function showError(input, config, errorMessage) {
+  const inputError = document.querySelector(`#${input.id}-error`);
+  inputError.textContent = errorMessage;
+  inputError.classList.add(config.errorClass);
 }
 //функция скрытия ошибки
-function hideError(input) {
+function hideError(input, config) {
     const inputError = document.querySelector(`#${input.id}-error`);
     inputError.textContent = '';
-    inputError.classList.remove('popup__error-visible');
+    inputError.classList.remove(config.errorClass);
+}
+//поиск кнопки сабмит
+function findButton(form, config) {
+  const button = form.querySelector(config.submitButtonSelector);
+  return button;
 }
 //функция деактивации кнопки
-function offButton(el) {
-    const button = el.closest('.form').querySelector('.popup__submit');
-    button.classList.add('popup__submit-disabled');
+function disableButtonSubmit(form, config) {
+    const button = findButton(form, config);
+    button.classList.add(config.inactiveButtonClass);
+    button.disabled = true;
 }
 //функция активации кнопки
-function onButton(el) {
-    const button = el.closest('.form').querySelector('.popup__submit');
-    button.classList.remove('popup__submit-disabled');
+function enableButtonSubmit(form, config) {
+    const button = findButton(form, config);
+    button.classList.remove(config.inactiveButtonClass);
+    button.disabled = false;
 }
-//функция для пределения валидности инпутов
-function checkInputValidity(el) {
-  if (!el.validity.valid) {
-    showError(el, el.validationMessage);
-    offButton(el);
+//проверка наличия невалидного поля
+function hasInvalidInput(form, config) {
+  const inputList = Array.from(form.querySelectorAll(config.inputSelector));
+  return inputList.some((input) => {
+    return !input.validity.valid;
+  })
+}
+//включение и выключение кнопки в зависимости от состояния импутов
+function toggleButtonState(form, config) {
+  if (hasInvalidInput(form, config)) {
+    disableButtonSubmit(form, config);
   } else {
-    hideError(el);
-    onButton(el);
+    enableButtonSubmit(form, config);
+  }
+}
+//функция для определения валидности инпутов
+function checkInputValidity(input, config) {
+  if (!input.validity.valid) {
+    showError(input, config, input.validationMessage);
+    input.classList.add(config.inputErrorClass);
+  } else {
+    hideError(input, config);
+    input.classList.remove(config.inputErrorClass);
   }
 }
 //проверка каждого инпута в форме
-function setEventListeners(form) {
-    const inputList = Array.from(form.querySelectorAll('.popup__text'));
+function setEventListeners(form, config) {
+    const inputList = Array.from(form.querySelectorAll(config.inputSelector));
+    toggleButtonState(form, config);
     inputList.forEach((el) => {
     el.addEventListener('input', function () {
-      checkInputValidity(el);
+      checkInputValidity(el, config);
+      toggleButtonState(form, config);
     });
   });
 }
 //проверка всех форм
-function enableValidation() {
+function enableValidation(config) {
     const formList = Array.from(document.forms);
     formList.forEach((el) => {
       el.addEventListener('input', function (evt) {
         evt.preventDefault();
       });
-      setEventListeners(el);
+      setEventListeners(el, config);
     });
 }
-enableValidation();
-
+enableValidation(validationConfig);
