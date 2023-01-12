@@ -24,14 +24,12 @@ function findButton(form, config) {
   return button;
 }
 //функция деактивации кнопки
-function disableButtonSubmit(form, config) {
-    const button = findButton(form, config);
+function disableButtonSubmit(config, button) {
     button.classList.add(config.inactiveButtonClass);
     button.disabled = true;
 }
 //функция активации кнопки
-function enableButtonSubmit(form, config) {
-    const button = findButton(form, config);
+function enableButtonSubmit(config, button) {
     button.classList.remove(config.inactiveButtonClass);
     button.disabled = false;
 }
@@ -43,11 +41,11 @@ function hasInvalidInput(form, config) {
   })
 }
 //включение и выключение кнопки в зависимости от состояния импутов
-function toggleButtonState(form, config) {
+function toggleButtonState(form, config, button) {
   if (hasInvalidInput(form, config)) {
-    disableButtonSubmit(form, config);
+    disableButtonSubmit(config, button);
   } else {
-    enableButtonSubmit(form, config);
+    enableButtonSubmit(config, button);
   }
 }
 //функция для определения валидности инпутов
@@ -62,12 +60,13 @@ function checkInputValidity(input, config) {
 }
 //проверка каждого инпута в форме
 function setEventListeners(form, config) {
+    const buttonSubmit = findButton(form, config);
     const inputList = Array.from(form.querySelectorAll(config.inputSelector));
-    toggleButtonState(form, config);
+    toggleButtonState(form, config, buttonSubmit);
     inputList.forEach((el) => {
     el.addEventListener('input', function () {
       checkInputValidity(el, config);
-      toggleButtonState(form, config);
+      toggleButtonState(form, config, buttonSubmit);
     });
   });
 }

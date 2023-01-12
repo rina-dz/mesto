@@ -2,7 +2,9 @@ const buttonToEdit = document.querySelector('.profile__edit-button');
 const buttonToAdd = document.querySelector('.profile__add-button');
 const buttonsToClose = document.querySelectorAll('.popup__close-icon');
 const popupEdit = document.querySelector('#popup_edit');
+const buttonSubmitEdit = popupEdit.querySelector('.popup__submit');
 const popupAdd = document.querySelector('#popup_add');
+const buttonSubmitAdd = popupAdd.querySelector('.popup__submit');
 const popupImage = document.querySelector('#popup_image');
 const imagePopup = document.querySelector('.popup__image');
 const descriptionPopup = document.querySelector('.popup__description');
@@ -29,38 +31,33 @@ function closePopupOverlay(evt) {
   }
 }
 //функция для закрытия попапа esc-ом 
-function closePopupByEsc(el) {
-  return function(evt) {
-    if (evt.key === "Escape") {
-      closePopup(el);
-    }
+function closePopupByEsc(evt) {
+  const popup = document.querySelector('.popup_opened');
+  if (evt.key === "Escape") {
+    closePopup(popup);
   }
 }
 //функция для открытия попапа
 function openPopup(el) {
   el.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupByEsc(el));
+  document.addEventListener('keydown', closePopupByEsc);
 }
 //функция для закрытия попапа
 function closePopup(el) {
   el.closest('.popup').classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupByEsc(el));
+  document.removeEventListener('keydown', closePopupByEsc);
 }
 //функция для открытия попапа-профиля
 function makePopupEditVisible() {
   openPopup(popupEdit);
   nameInput.value = oldName.textContent;
   jobInput.value = oldJob.textContent;
-  const button = popupEdit.querySelector('.popup__submit');
-  button.classList.remove('popup__submit-disabled');
-  button.disabled = false;
+  enableButtonSubmit(validationConfig, buttonSubmitEdit);
 }
 //функция для открытия попапа для добавления карточки
 function makePopupAddVisible() {
   openPopup(popupAdd);
-  const button = popupAdd.querySelector('.popup__submit');
-  button.classList.add('popup__submit-disabled');
-  button.disabled = true;
+  disableButtonSubmit(validationConfig, buttonSubmitAdd);
 }
 //функция для открытия попапа-картинки
 function makePopupImageVisible(evt) {
@@ -116,7 +113,7 @@ function createCard(imageLink, imageName) {
 //закрытие попапа
 buttonsToClose.forEach(el => {
   el.addEventListener('click', () => {
-    const closestPopup = el.parentElement;
+    const closestPopup = el.closest('.popup');
     closePopup(closestPopup);
   });
 });
