@@ -25,26 +25,26 @@ function addCardsForJS() {
 }
 //закрытие попапа нажатием на оверлей
 function closePopupOverlay(evt) {
-  const eventTarget = evt.target;
+  const popup = evt.target.closest('.popup');
   if (evt.target.classList.contains('popup_opened')) {
-    closePopup(eventTarget);
+    closePopup(popup);
   }
 }
 //функция для закрытия попапа esc-ом 
 function closePopupByEsc(evt) {
-  const popup = document.querySelector('.popup_opened');
   if (evt.key === "Escape") {
+    const popup = document.querySelector('.popup_opened');
     closePopup(popup);
   }
 }
 //функция для открытия попапа
-function openPopup(el) {
-  el.classList.add('popup_opened');
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByEsc);
 }
 //функция для закрытия попапа
-function closePopup(el) {
-  el.closest('.popup').classList.remove('popup_opened');
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupByEsc);
 }
 //функция для открытия попапа-профиля
@@ -72,18 +72,18 @@ function makePopupImageVisible(evt) {
 //функция для изменения имени и рода деятельности
 function handleProfileFormSubmit (evt) {
   evt.preventDefault();
-  const eventTarget = evt.target;
+  const popup = evt.target.closest('.popup');
   oldName.textContent = nameInput.value;
   oldJob.textContent = jobInput.value;
-  closePopup(eventTarget);
+  closePopup(popup);
 }
 //функция для добавления новой карточки
 function makeNexElementVisible (evt) {
   evt.preventDefault();
-  const eventTarget = evt.target;
+  const popup = evt.target.closest('.popup');
   cardsContainer.prepend(createCard(inputLink.value, inputPlaceName.value));
   formImageAdding.reset();
-  closePopup(eventTarget);
+  closePopup(popup);
 }
 //функция удаление элемента при нажатии на урну 
 function handleWastebasketClick(evt) {
