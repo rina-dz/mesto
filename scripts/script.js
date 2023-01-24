@@ -19,15 +19,17 @@ const oldJob = document.querySelector('.profile__description');
 const elementTemplate = document.querySelector('#new_element').content;
 const cardsContainer = document.querySelector('.elements');
 const popups = Array.from(document.querySelectorAll('.popup'));
+import { Card } from './card.js';
+import { FormValidator } from './FormValidator.js';
+export { makePopupImageVisible };
 //функция для добавления карточек через js, а не через html 
 function addCardsForJS() {
   initialCards.forEach(card => cardsContainer.append(createCard(card.link, card.name)))
 }
 //закрытие попапа нажатием на оверлей
 function closePopupOverlay(evt) {
-  const popup = evt.target.closest('.popup');
   if (evt.target.classList.contains('popup_opened')) {
-    closePopup(popup);
+    closePopup(evt.currentTarget);
   }
 }
 //функция для закрытия попапа esc-ом 
@@ -72,43 +74,22 @@ function makePopupImageVisible(evt) {
 //функция для изменения имени и рода деятельности
 function handleProfileFormSubmit (evt) {
   evt.preventDefault();
-  const popup = evt.target.closest('.popup');
   oldName.textContent = nameInput.value;
   oldJob.textContent = jobInput.value;
-  closePopup(popup);
+  closePopup(popupEdit);
 }
 //функция для добавления новой карточки
 function makeNexElementVisible (evt) {
   evt.preventDefault();
-  const popup = evt.target.closest('.popup');
   cardsContainer.prepend(createCard(inputLink.value, inputPlaceName.value));
   formImageAdding.reset();
-  closePopup(popup);
-}
-//функция удаление элемента при нажатии на урну 
-function handleWastebasketClick(evt) {
-  evt.preventDefault();
-  const eventTarget = evt.target;
-  eventTarget.closest('.element').remove();
-}
-//функция изменения цвета сердечка
-function handleLikeClick(evt) {
-  evt.target.classList.toggle('element__active-like');
+  closePopup(popupAdd);
 }
 //функция создания карточки
 function createCard(imageLink, imageName) {
-  const cardElement = elementTemplate.querySelector('.element').cloneNode(true);
-  const image = cardElement.querySelector('.element__image');
-  image.src = imageLink;
-  image.alt = imageName;
-  cardElement.querySelector('.element__name').textContent = imageName;
-  //открытие картинки на весь экран
-  image.addEventListener('click', makePopupImageVisible);
-  //удаление элемента при нажатии на урну
-  cardElement.querySelector('.element__trash').addEventListener('click', handleWastebasketClick);
-  //изменение цвета сердечка при нажатии
-  cardElement.querySelector('.element__like').addEventListener('click', handleLikeClick);
-  return cardElement;
+  const card = new Card(imageLink, imageName, elementTemplate);
+  const cardTemplate = card.generateCard();
+  return cardTemplate;
 }
 //закрытие попапа
 buttonsToClose.forEach(el => {
