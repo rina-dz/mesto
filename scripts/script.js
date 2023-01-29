@@ -2,9 +2,7 @@ const buttonToEdit = document.querySelector('.profile__edit-button');
 const buttonToAdd = document.querySelector('.profile__add-button');
 const buttonsToClose = document.querySelectorAll('.popup__close-icon');
 const popupEdit = document.querySelector('#popup_edit');
-const buttonSubmitEdit = popupEdit.querySelector('.popup__submit');
 const popupAdd = document.querySelector('#popup_add');
-const buttonSubmitAdd = popupAdd.querySelector('.popup__submit');
 const popupImage = document.querySelector('#popup_image');
 const imagePopup = document.querySelector('.popup__image');
 const descriptionPopup = document.querySelector('.popup__description');
@@ -19,9 +17,25 @@ const oldJob = document.querySelector('.profile__description');
 const elementTemplate = document.querySelector('#new_element').content;
 const cardsContainer = document.querySelector('.elements');
 const popups = Array.from(document.querySelectorAll('.popup'));
+const addForm = document.querySelector('#add_form');
+const editForm = document.querySelector('#edit_form');
+const validationConfig = {
+  formSelector: '.form',
+  inputSelector: '.popup__text',
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit-disabled',
+  inputErrorClass: 'popup__text-error',
+  errorClass: 'popup__error-visible'
+};
 import { Card } from './card.js';
 import { FormValidator } from './FormValidator.js';
 export { makePopupImageVisible };
+//проверка всех форм
+function checkForm(config, form) {
+    const formForCheck = new FormValidator(config, form);
+    const check = formForCheck.enableValidation();
+    return check;
+}
 //функция для добавления карточек через js, а не через html 
 function addCardsForJS() {
   initialCards.forEach(card => cardsContainer.append(createCard(card.link, card.name)))
@@ -54,12 +68,14 @@ function makePopupEditVisible() {
   openPopup(popupEdit);
   nameInput.value = oldName.textContent;
   jobInput.value = oldJob.textContent;
-  enableButtonSubmit(validationConfig, buttonSubmitEdit);
+  const form = new FormValidator(validationConfig, editForm);
+  form.enableButtonSubmit();
 }
 //функция для открытия попапа для добавления карточки
 function makePopupAddVisible() {
   openPopup(popupAdd);
-  disableButtonSubmit(validationConfig, buttonSubmitAdd);
+  const form = new FormValidator(validationConfig, addForm);
+  form.disableButtonSubmit();
 }
 //функция для открытия попапа-картинки
 function makePopupImageVisible(evt) {
@@ -102,6 +118,8 @@ addCardsForJS();
 popups.forEach((popup) => {
   popup.addEventListener('click', closePopupOverlay)
 }) 
+checkForm(validationConfig, addForm);
+checkForm(validationConfig, editForm);
 formProfileChanges.addEventListener('submit', handleProfileFormSubmit);
 formImageAdding.addEventListener('submit', makeNexElementVisible);
 buttonToEdit.addEventListener('click', makePopupEditVisible);
