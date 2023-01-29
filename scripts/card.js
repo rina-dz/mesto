@@ -12,27 +12,28 @@ class Card {
     return cardElement;
   }
 
-  _handleLikeClick() {
-    this._element.querySelector('.element__like').classList.toggle('element__active-like');
+  _handleLikeClick(like) {
+    like.classList.toggle('element__active-like');
   }
 
   _handleWastebasketClick() {
     this._element.remove();
   }
 
-  _setEventListeners() {
+  _setEventListeners(like) {
     this._element.querySelector('.element__trash').addEventListener('click', () => {
       this._handleWastebasketClick();
     });
-    this._element.querySelector('.element__like').addEventListener('click', () => {
-      this._handleLikeClick();
+    like.addEventListener('click', () => {
+      this._handleLikeClick(like);
     });
     this._element.querySelector('.element__image').addEventListener('click', makePopupImageVisible);
   }
 
   generateCard() {
     this._element = this._getTemplate();
-    this._setEventListeners();
+    this._likeButton = this._element.querySelector('.element__like');
+    this._setEventListeners(this._likeButton);
 
     const image = this._element.querySelector('.element__image');
     image.src = this._image;

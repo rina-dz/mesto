@@ -17,8 +17,6 @@ const oldJob = document.querySelector('.profile__description');
 const elementTemplate = document.querySelector('#new_element').content;
 const cardsContainer = document.querySelector('.elements');
 const popups = Array.from(document.querySelectorAll('.popup'));
-const addForm = document.querySelector('#add_form');
-const editForm = document.querySelector('#edit_form');
 const validationConfig = {
   formSelector: '.form',
   inputSelector: '.popup__text',
@@ -27,13 +25,14 @@ const validationConfig = {
   inputErrorClass: 'popup__text-error',
   errorClass: 'popup__error-visible'
 };
+const editForm = new FormValidator(validationConfig, document.querySelector('#edit_form'));
+const addForm = new FormValidator(validationConfig, document.querySelector('#add_form'));
 import { Card } from './card.js';
 import { FormValidator } from './FormValidator.js';
 export { makePopupImageVisible };
-//проверка всех форм
-function checkForm(config, form) {
-    const formForCheck = new FormValidator(config, form);
-    const check = formForCheck.enableValidation();
+//функция для валидации формы
+function checkForm(form) {
+    const check = form.enableValidation();
     return check;
 }
 //функция для добавления карточек через js, а не через html 
@@ -68,14 +67,12 @@ function makePopupEditVisible() {
   openPopup(popupEdit);
   nameInput.value = oldName.textContent;
   jobInput.value = oldJob.textContent;
-  const form = new FormValidator(validationConfig, editForm);
-  form.enableButtonSubmit();
+  editForm.enableButtonSubmit();
 }
 //функция для открытия попапа для добавления карточки
 function makePopupAddVisible() {
   openPopup(popupAdd);
-  const form = new FormValidator(validationConfig, addForm);
-  form.disableButtonSubmit();
+  addForm.disableButtonSubmit();
 }
 //функция для открытия попапа-картинки
 function makePopupImageVisible(evt) {
@@ -118,8 +115,8 @@ addCardsForJS();
 popups.forEach((popup) => {
   popup.addEventListener('click', closePopupOverlay)
 }) 
-checkForm(validationConfig, addForm);
-checkForm(validationConfig, editForm);
+checkForm(addForm);
+checkForm(editForm);
 formProfileChanges.addEventListener('submit', handleProfileFormSubmit);
 formImageAdding.addEventListener('submit', makeNexElementVisible);
 buttonToEdit.addEventListener('click', makePopupEditVisible);
