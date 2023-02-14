@@ -1,4 +1,4 @@
-import { makePopupImageVisible } from './script.js';
+import { imagePopup } from './script.js';
 
 class Card {
   constructor(imageLink, imageName, selectorTemplate) {
@@ -27,7 +27,9 @@ class Card {
     like.addEventListener('click', () => {
       this._handleLikeClick(like);
     });
-    this._element.querySelector('.element__image').addEventListener('click', makePopupImageVisible);
+    this._element.querySelector('.element__image').addEventListener('click', () => {
+      imagePopup.open(this._image, this._name)
+    });
   }
 
   generateCard() {
