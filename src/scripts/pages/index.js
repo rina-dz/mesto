@@ -1,17 +1,12 @@
-const buttonToEdit = document.querySelector('.profile__edit-button');
-const buttonToAdd = document.querySelector('.profile__add-button');
-const nameInput = document.getElementById('input_name');
-const jobInput = document.getElementById('input_job');
-const elementTemplate = document.querySelector('#new_element').content;
-const cardsContainer = document.querySelector('.elements');
-const validationConfig = {
-  formSelector: '.form',
-  inputSelector: '.popup__text',
-  submitButtonSelector: '.popup__submit',
-  inactiveButtonClass: 'popup__submit-disabled',
-  inputErrorClass: 'popup__text-error',
-  errorClass: 'popup__error-visible'
-};
+import './index.css';
+import { initialCards } from '../components/cards.js'
+import { buttonToEdit, buttonToAdd, nameInput, jobInput, elementTemplate, cardsContainer, validationConfig } from '../utils/constants.js';
+import { Card } from '../components/card.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { Section } from '../components/section.js';
+import { UserInfo } from '../components/UserInfo.js';
 const userInformation = new UserInfo({userName: '.profile__name', userDescription: '.profile__description'});
 const editForm = new FormValidator(validationConfig, document.querySelector('#edit_form'));
 const addForm = new FormValidator(validationConfig, document.querySelector('#add_form'));
@@ -30,14 +25,6 @@ const addPopup = new PopupWithForm('#popup_add', {submit: (info) => {
     //cardsContainer.addItem(anotherCard);
   cardsContainer.prepend(createCard(info.PictureLink, info.Placename));
 }});
-
-import { Card } from './card.js';
-import { FormValidator } from './FormValidator.js';
-import { PopupWithImage } from './PopupWithImage.js';
-import { PopupWithForm } from './PopupWithForm.js';
-import { Section } from './section.js';
-import { UserInfo } from './UserInfo.js';
-export { imagePopup };
 const cardsAdding = new Section({items: initialCards,
   renderer: (card) => {
     const newCard = createCard(card.link, card.name);
@@ -70,6 +57,7 @@ function createCard(imageLink, imageName) {
   const cardTemplate = card.generateCard();
   return cardTemplate;
 }
+export { imagePopup };
 checkForm(addForm);
 checkForm(editForm);
 buttonToEdit.addEventListener('click', makePopupEditVisible);

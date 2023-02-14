@@ -1,4 +1,4 @@
-import { imagePopup } from './script.js';
+import { imagePopup } from '../pages/index.js';
 
 class Card {
   constructor(imageLink, imageName, selectorTemplate) {
