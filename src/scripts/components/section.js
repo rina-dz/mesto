@@ -12,8 +12,12 @@ class Section {
         });
     }
 
-    addItem(element) {
+    addDefaultItems(element) {
         this._container.append(element);
+    }
+
+    addNewCard(card) {
+        this._container.prepend(card);
     }
 }
 

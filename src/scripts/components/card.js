@@ -1,10 +1,9 @@
-import { imagePopup } from '../pages/index.js';
-
 class Card {
-  constructor(imageLink, imageName, selectorTemplate) {
+  constructor(imageLink, imageName, selectorTemplate, {popupOpening}) {
     this._image = imageLink;
     this._name = imageName;
     this._templateSelector = selectorTemplate;
+    this._openPopup = popupOpening;
   }
   
   _getTemplate() {
@@ -28,7 +27,7 @@ class Card {
       this._handleLikeClick(like);
     });
     this._element.querySelector('.element__image').addEventListener('click', () => {
-      imagePopup.open(this._image, this._name)
+      this._openPopup(this._image, this._name)
     });
   }
 
