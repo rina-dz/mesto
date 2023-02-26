@@ -1,5 +1,7 @@
 const buttonToEdit = document.querySelector('.profile__edit-button');
 const buttonToAdd = document.querySelector('.profile__add-button');
+const buttonToChange = document.querySelector('.profile__avatar');
+const buttonToDelete = document.querySelector('#button_delete');
 const nameInput = document.getElementById('input_name');
 const jobInput = document.getElementById('input_job');
 const elementTemplate = document.querySelector('#new_element').content;
@@ -13,4 +15,4 @@ const validationConfig = {
   errorClass: 'popup__error-visible'
 };
 
-export { buttonToEdit, buttonToAdd, nameInput, jobInput, elementTemplate, cardsContainer, validationConfig };
+export { buttonToEdit, buttonToAdd, buttonToChange, buttonToDelete, nameInput, jobInput, elementTemplate, cardsContainer, validationConfig };

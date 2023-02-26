@@ -1,9 +1,11 @@
 class Card {
-  constructor(imageLink, imageName, selectorTemplate, {popupOpening}) {
+  constructor(imageLink, imageName, selectorTemplate, {popupOpening}, {deletePopup}, {cardDelete}) {
     this._image = imageLink;
     this._name = imageName;
     this._templateSelector = selectorTemplate;
     this._openPopup = popupOpening;
+    this._cardDelete = cardDelete;
+    this._deletePopup = deletePopup;
   }
   
   _getTemplate() {
@@ -21,7 +23,8 @@ class Card {
 
   _setEventListeners(like) {
     this._element.querySelector('.element__trash').addEventListener('click', () => {
-      this._handleWastebasketClick();
+      this._deletePopup();
+      this._cardDelete(() => {this._handleWastebasketClick()});
     });
     like.addEventListener('click', () => {
       this._handleLikeClick(like);

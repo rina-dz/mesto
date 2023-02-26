@@ -11,7 +11,8 @@
   </header>
   <main class="content">
     <section class="profile">
-      <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="аватар пользователя">
+      <div class="profile__avatar">
+      </div>
       <div class="profile__info">
         <h1 class="profile__name">Жак Ив-Кусто</h1>
         <button class="profile__edit-button" type="button"></button>
@@ -58,13 +59,34 @@
       <button type="button" class="popup__close-icon"></button>
     </div>
   </div>
+  <div class="popup" id="popup_card-delete">
+    <div class="popup__container">
+      <h2 class="popup__title">Вы уверены?</h2>
+      <button class="popup__submit" type="submit" id="button_delete">Да</button>
+      <button type="button" class="popup__close-icon"></button>
+    </div>
+  </div>
+  <div class="popup" id="popup_avatar">
+    <div class="popup__container">
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form name="avatarForm" id="avatar_form" class="form popup__form-avatar" novalidate>
+        <input type="url" name="Avatar" placeholder="Ссылка на картинку" class="popup__text" id="input_avatar" required>
+        <span class="popup__error" id="input_avatar-error"></span>
+        <button class="popup__submit" type="submit">Сохранить</button>
+      </form>
+      <button type="button" class="popup__close-icon"></button>
+    </div>
+  </div>
   <template id="new_element">
     <article class="element">
       <button class="element__trash" type="button"></button>
       <img class="element__image" src="#" alt="Изображение карточки">
       <div class="element__info">
         <h2 class="element__name"></h2>
-        <button class="element__like" type="button"></button>
+        <div class="element__like-place">
+          <button class="element__like" type="button"></button>
+          <h2 class="element__like-counter">0</h2>
+        </div>
       </div>
     </article>
   </template>
