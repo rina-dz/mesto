@@ -5,7 +5,6 @@ const buttonToDelete = document.querySelector('#button_delete');
 const nameInput = document.getElementById('input_name');
 const jobInput = document.getElementById('input_job');
 const elementTemplate = document.querySelector('#new_element').content;
-const cardsContainer = document.querySelector('.elements');
 const validationConfig = {
   formSelector: '.form',
   inputSelector: '.popup__text',
@@ -15,4 +14,4 @@ const validationConfig = {
   errorClass: 'popup__error-visible'
 };
 
-export { buttonToEdit, buttonToAdd, buttonToChange, buttonToDelete, nameInput, jobInput, elementTemplate, cardsContainer, validationConfig };
+export { buttonToEdit, buttonToAdd, buttonToChange, buttonToDelete, nameInput, jobInput, elementTemplate, validationConfig };

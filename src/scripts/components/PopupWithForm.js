@@ -22,6 +22,16 @@ class PopupWithForm extends Popup {
         super.close();
     }
 
+    loadingButton(buttonText) {
+        this._buttonSubmit.disabled = true;
+        this._buttonSubmit.textContent = buttonText;
+    }
+
+    normalStateButton(buttonText) {
+        this._buttonSubmit.disabled = false;
+        this._buttonSubmit.textContent = buttonText;
+    }
+
     setEventListeners() {
         super.setEventListeners();
         this._form.addEventListener('submit', (evt) => {
