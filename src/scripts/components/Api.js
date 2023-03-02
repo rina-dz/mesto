@@ -1,7 +1,7 @@
 class Api {
-  constructor({baseUrl, headers}) {
-    this.baseUrl = baseUrl;
-    this.headers = headers;
+  constructor(data) {
+    this.baseUrl = data.baseUrl;
+    this.headers = data.headers;
   }
 
   //получение карточек с сервера
@@ -26,7 +26,7 @@ class Api {
     return fetch(`https://${this.baseUrl}users/me`, {
       method: 'GET',
       headers: this.headers
-   })
+    })
    .then((res) => {
     if (res.ok) {
       return res.json()
@@ -111,59 +111,51 @@ class Api {
       headers: this.headers
     })
     .then((res) => {
-        if (res.ok) {
-          return res.json()
+      if (res.ok) {
+        return res.json()
       } else {
-        return Promise.reject(`Ошибка: ${res.status}`);
-    }})
-    .catch((err) => {
-        console.log(err);
-    }) 
-  }
-
-  //поставить лайк
-  _putLike(cardId) {
-    return fetch(`https://mesto.${this.baseUrl}cards/${cardId}/likes`, {
-        method: 'PUT',
-        headers: this.headers
+      return Promise.reject(`Ошибка: ${res.status}`);
+      }
     })
-    .then((res) => {
-        if (res.ok) {
-          return res.json()
-      } else {
-        return Promise.reject(`Ошибка: ${res.status}`);
-    }})
     .catch((err) => {
-        console.log(err);
-    }) 
-  }
-
-  //удаление лайка
-  _removeLike(cardId) {
-    return fetch(`https://mesto.${this.baseUrl}cards/${cardId}/likes`, {
-        method: 'DELETE',
-        headers: this.headers
-    })
-    .then((res) => {
-        if (res.ok) {
-          return res.json()
-      } else {
-        return Promise.reject(`Ошибка: ${res.status}`);
-    }})
-    .catch((err) => {
-        console.log(err);
+      console.log(err);
     }) 
   }
 
   //переключение лайков
   toggleLike(cardId, like) {
     if (like.classList.contains('element__active-like')) {
-        return this._putLike(cardId);
+      return fetch(`https://mesto.${this.baseUrl}cards/${cardId}/likes`, {
+        method: 'PUT',
+        headers: this.headers
+      })
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        } else {
+        return Promise.reject(`Ошибка: ${res.status}`);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      }) 
     } else {
-        return this._removeLike(cardId);
+      return fetch(`https://mesto.${this.baseUrl}cards/${cardId}/likes`, {
+        method: 'DELETE',
+        headers: this.headers
+      })
+      .then((res) => {
+          if (res.ok) {
+            return res.json()
+          } else {
+            return Promise.reject(`Ошибка: ${res.status}`);
+          }
+        })
+      .catch((err) => {
+        console.log(err);
+      }) 
     }
   }
-
 }; 
 
 export { Api };

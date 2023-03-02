@@ -1,13 +1,13 @@
 //Токен: 9d97c533-6f82-4668-9816-7bf0cf3c6ccd
 //Идентификатор группы: cohort-60
 import './index.css';
-import { buttonToEdit, buttonToAdd, buttonToChange, buttonToDelete, nameInput, jobInput, elementTemplate, validationConfig } from '../utils/constants.js';
-import { Card } from '../components/card.js';
+import { buttonToEdit, buttonToAdd, buttonToChange, nameInput, jobInput, elementTemplate, validationConfig } from '../utils/constants.js';
+import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
-import { Popup } from '../components/popup.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
-import { Section } from '../components/section.js';
+import { PopupForDeleteCard } from '../components/PopupForDeleteCard.js';
+import { Section } from '../components/Section.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { Api } from '../components/Api.js';
 const api = new Api({
@@ -36,14 +36,16 @@ const avatarForm = new FormValidator(validationConfig, document.querySelector('#
 //создание секции для карточек
 const cardsAdding = new Section(
   {renderer: (card) => {
-    const newCard = createCard(card.link, card.name, card.likes, card._id);
+    const owner = card.owner;
+    const newCard = createCard(card.link, card.name, card.likes, card._id, owner._id, card.likes);
     cardsAdding.addDefaultItems(newCard);
   }}, '.elements');
 //отображение карточек с сервера
 api.getInitialCards()
   .then((result) => {
     result.forEach(el => {
-      const newCard = createCard(el.link, el.name, el.likes.length, el._id);
+      const owner = el.owner;
+      const newCard = createCard(el.link, el.name, el.likes.length, el._id, owner._id, el.likes);
       cardsAdding.addDefaultItems(newCard);
     })
   })
@@ -51,7 +53,7 @@ api.getInitialCards()
 const imagePopup = new PopupWithImage('#popup_image');
 imagePopup.setEventListeners();
 //попап для удаления карточки
-const deletePopup = new Popup('#popup_card-delete');
+const deletePopup = new PopupForDeleteCard('#popup_card-delete');
 deletePopup.setEventListeners();
 //попап для изменения аватара
 const avatarPopup = new PopupWithForm('#popup_avatar', {submit: (info) => {
@@ -77,13 +79,17 @@ editPopup.setEventListeners();
 //попап добавления карточки
 const addPopup = new PopupWithForm('#popup_add', {submit: (info) => {
   addPopup.loadingButton('Сохранение...');
-  const card = {name: info.Placename, link: info.PictureLink, likes: 0, _id: userId};
-  const newCard = createCard(card.link, card.name, card.likes, card._id);
+  const card = {name: info.Placename, link: info.PictureLink};
   api.addNewCard(card)
+  .then((res) => {
+    const likes = res.likes;
+    const owner = res.owner;
+    const newCard = createCard(res.link, res.name, likes.length, res._id, owner._id, likes);
+    cardsAdding.addNewCard(newCard);
+  })
   .finally (() => {
     addPopup.normalStateButton('Создать');
   })
-  cardsAdding.addNewCard(newCard);
 }});
 addPopup.setEventListeners();
 //функция для валидации формы
@@ -110,24 +116,28 @@ function makePopupAddVisible() {
   addForm.disableButtonSubmit();
 }
 //функция создания карточки
-function createCard(imageLink, imageName, numberOfLikes, cardId) {
-  const card = new Card(imageLink, imageName, numberOfLikes, elementTemplate, 
+function createCard(imageLink, imageName, numberOfLikes, cardId, ownerId, likesArray) {
+  const card = new Card(imageLink, imageName, numberOfLikes, elementTemplate, cardId, ownerId, likesArray, 
     {popupOpening: (link, name) => {imagePopup.open(link, name)}},
-    {deletePopup: () => {deletePopup.open();}},
-    {cardDelete: (act) => {
-      buttonToDelete.addEventListener('click', () => {
-        act();
-        api.deleteCard(cardId);
-        deletePopup.close();
-      })}},
-    {toggleLike: (like, likeButton) => {
+    {cardDelete: (id) => {
+      deletePopup.open();
+      deletePopup.handleDelete(() => {
+          api.deleteCard(id)
+          .then(() => {
+            deletePopup.close();
+            card.handleWastebasketClick();
+          })
+        }
+      )
+    }},
+    {toggleLike: (like, likeCounter) => {
       api.toggleLike(cardId, like)
       .then((res) => {
         const likesNumber = res.likes;
-        likeButton.textContent = likesNumber.length;
+        likeCounter.textContent = likesNumber.length;
       })
     }});
-  const cardTemplate = card.generateCard(cardId, userId);
+  const cardTemplate = card.generateCard(userId);
   return cardTemplate;
 }
 checkForm(addForm);
