@@ -1,6 +1,6 @@
 class Card {
-  constructor(imageLink, imageName, numberOfLikes, selectorTemplate, cardId, ownerId, likesArray, {popupOpening}, {cardDelete}, {toggleLike}) {
-    this._image = imageLink;
+  constructor({ imageLink, imageName, numberOfLikes, selectorTemplate, cardId, ownerId, likesArray, popupOpening, cardDelete, toggleLike }) {
+    this._imageLink = imageLink;
     this._name = imageName;
     this._numberOfLikes = numberOfLikes;
     this._templateSelector = selectorTemplate;
@@ -11,22 +11,30 @@ class Card {
     this._cardDelete = cardDelete;
     this._toggleLike = toggleLike;
   }
-  
+
+  _isLiked(like) {
+    if (like.classList.contains('element__active-like')) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  handleToggleLike(data) {
+    this._likeCounter.textContent = data.likes.length;
+    this._likeButton.classList.toggle('element__active-like');
+  }
+
   _getTemplate() {
     const cardElement = this._templateSelector.querySelector('.element').cloneNode(true);
     return cardElement;
   }
 
-  _handleLikeClick(like, likeCounter) {
-    like.classList.toggle('element__active-like');
-    this._toggleLike(like, likeCounter);
-  }
-
-  handleWastebasketClick() {
+  deleteCard() {
     this._element.remove();
   }
 
-  _isLiked(userId, like) {
+  _isLikedByUser(userId, like) {
     if (this._likesArray.find(el => el._id === userId)) {
       like.classList.add('element__active-like');
     } else {
@@ -34,15 +42,15 @@ class Card {
     }
   }
 
-  _setEventListeners(like, likeCounter, trash) {
-    trash.addEventListener('click', () => {
+  _setEventListeners() {
+    this._trash.addEventListener('click', () => {
       this._cardDelete(this._cardId);
     });
-    like.addEventListener('click', () => {
-      this._handleLikeClick(like, likeCounter);
+    this._likeButton.addEventListener('click', () => {
+      this._toggleLike(this._isLiked(this._likeButton), this._cardId);
     });
     this._element.querySelector('.element__image').addEventListener('click', () => {
-      this._openPopup(this._image, this._name)
+      this._openPopup(this._imageLink, this._name)
     });
   }
 
@@ -51,20 +59,20 @@ class Card {
     this._likeButton = this._element.querySelector('.element__like');
     this._likeCounter = this._element.querySelector('.element__like-counter');
     this._trash = this._element.querySelector('.element__trash');
+    this._image = this._element.querySelector('.element__image');
 
     this._likeCounter.textContent = this._numberOfLikes;
-    this._isLiked(userId, this._likeButton);
+    this._isLikedByUser(userId, this._likeButton);
 
-    const image = this._element.querySelector('.element__image');
-    image.src = this._image;
-    image.alt = this._name;
+    this._image.src = this._imageLink;
+    this._image.alt = this._name;
     this._element.querySelector('.element__name').textContent = this._name;
 
     if (userId !== this._ownerId) {
       this._trash.remove();
     }
 
-    this._setEventListeners(this._likeButton, this._likeCounter, this._trash);
+    this._setEventListeners();
 
     return this._element;
   }

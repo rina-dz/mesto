@@ -6,7 +6,7 @@ class PopupForDeleteCard extends Popup {
         this._deleteButton = this._popup.querySelector('.popup__submit');
     }
 
-    handleDelete(action) {
+    setDeleteHandler(action) {
         this._delete = action;
     }
 
