@@ -25,9 +25,8 @@ class UserInfo {
     }
 
     setUserInfo(newInfo) {
-        this._userName.textContent = newInfo.name;
-        this._userDescription.textContent = newInfo.description;
-        this._userAvatar.style = `background-image: url(${newInfo.avatar});`;
+        this.setUserNameAndDescription(newInfo);
+        this.setUserAvatar(newInfo.avatar);
         this._userId = newInfo._id;
     }
 }

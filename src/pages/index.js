@@ -1,15 +1,15 @@
 //Токен: 9d97c533-6f82-4668-9816-7bf0cf3c6ccd
 //Идентификатор группы: cohort-60
 import './index.css';
-import { buttonToEdit, buttonToAdd, buttonToChange, nameInput, jobInput, elementTemplate, validationConfig } from '../utils/constants.js';
-import { Card } from '../components/Card.js';
-import { FormValidator } from '../components/FormValidator.js';
-import { PopupWithImage } from '../components/PopupWithImage.js';
-import { PopupWithForm } from '../components/PopupWithForm.js';
-import { PopupForDeleteCard } from '../components/PopupForDeleteCard.js';
-import { Section } from '../components/Section.js';
-import { UserInfo } from '../components/UserInfo.js';
-import { Api } from '../components/Api.js';
+import { buttonToEdit, buttonToAdd, buttonToChange, nameInput, jobInput, elementTemplate, validationConfig } from '../scripts/utils/constants.js';
+import { Card } from '../scripts/components/Card.js';
+import { FormValidator } from '../scripts/components/FormValidator.js';
+import { PopupWithImage } from '../scripts/components/PopupWithImage.js';
+import { PopupWithForm } from '../scripts/components/PopupWithForm.js';
+import { PopupForDeleteCard } from '../scripts/components/PopupForDeleteCard.js';
+import { Section } from '../scripts/components/Section.js';
+import { UserInfo } from '../scripts/components/UserInfo.js';
+import { Api } from '../scripts/components/Api.js';
 const api = new Api({
   baseUrl: 'https://nomoreparties.co/v1/cohort-60/',
   headers: {
